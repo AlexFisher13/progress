@@ -15,26 +15,31 @@ public class MainController {
     @Autowired
     IWorkoutRepository repo;
 
+    @CrossOrigin
     @GetMapping("/all")
     public List<Workout> findAll() {
         return repo.findAll();
     }
 
+    @CrossOrigin
     @GetMapping("{id}")
     public Workout getWorkoutById(@PathVariable String id) throws Exception {
         return repo.findById(id).orElseThrow(() -> new Exception("Workout not found"));
     }
 
+    @CrossOrigin
     @PostMapping("/addworkout")
     public void addWorkout(@RequestBody Workout workout) {
         repo.save(workout);
     }
 
+    @CrossOrigin
     @DeleteMapping("{id}")
     public void deleteWorkout(@PathVariable String id) {
         repo.deleteById(id);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}/addexercise")
     public void addExercise(
             @PathVariable String id,
@@ -44,6 +49,7 @@ public class MainController {
         repo.save(workout);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}/addset")
     public void addset(
             @PathVariable String id,
