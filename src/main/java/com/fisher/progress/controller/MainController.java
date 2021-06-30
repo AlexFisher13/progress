@@ -7,6 +7,7 @@ import com.fisher.progress.domain.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -43,7 +44,7 @@ public class MainController {
     @PutMapping("/{id}/addexercise")
     public void addExercise(
             @PathVariable String id,
-            @RequestBody Exercise exercise) throws Exception {
+            @Valid @RequestBody Exercise exercise) throws Exception {
         Workout workout = repo.findById(id).orElseThrow(() -> new Exception("Workout not found"));
         workout.getExercise().add(exercise);
         repo.save(workout);
